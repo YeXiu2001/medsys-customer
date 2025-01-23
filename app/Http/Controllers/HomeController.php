@@ -19,6 +19,7 @@ class HomeController extends Controller
         $currentTime = now()->toTimeString();
         $pharmacyinfos = DB::table('pharmacy_info')
                         ->where('enable' , 1)
+                        ->orderBy('o_time', 'asc')
                         ->get();
         return view('home', ['user' => $user, 'pharmacyinfos' => $pharmacyinfos]);
     }
