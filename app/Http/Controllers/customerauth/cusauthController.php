@@ -25,7 +25,7 @@ class cusauthController extends Controller
 
     // Debugging: Log the query result
     if (!$user) {
-        return response()->json(['status' => 'error', 'message' => 'Email not found'], 404);
+        return response()->json(['status' => 'error', 'message' => 'Invalid email or password'], 404);
     }
 
     if (Hash::check($request->password, $user->password)) {

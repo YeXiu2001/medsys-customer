@@ -16,10 +16,8 @@ class HomeController extends Controller
         }
         $user = DB::table('user_customers')->where('id', $userId)->first();
 
-        $currentTime = now()->format('H:i:s');
+        $currentTime = now()->toTimeString();
         $pharmacyinfos = DB::table('pharmacy_info')
-                        ->where('o_time', '<', $currentTime)
-                        ->where('c_time', '>', $currentTime)
                         ->where('enable' , 1)
                         ->get();
         return view('home', ['user' => $user, 'pharmacyinfos' => $pharmacyinfos]);

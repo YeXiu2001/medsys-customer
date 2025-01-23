@@ -36,3 +36,4 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 include __DIR__ . '/customerauth/auth.php';
+include __DIR__ . '/orders/order.php';

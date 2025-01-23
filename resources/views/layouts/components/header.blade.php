@@ -14,10 +14,10 @@
 
                             <a href="/home" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo_only.png" alt="" height="42">
+                                    <img src="{{url ('assets/images/logo_only.png') }}" alt="" height="42">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/medsys_logo_nobg.png" alt="" height="49">
+                                    <img src="{{url ('assets/images/medsys_logo_nobg.png') }}" alt="" height="49">
                                 </span>
                             </a>
                         </div>
@@ -28,9 +28,9 @@
                         </button>
 
                         <!-- App Search-->
-                        <form class="app-search d-none d-lg-block">
+                        <form id="headsearchform" class="app-search d-none d-lg-block">
                             <div class="position-relative">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input id="headsearch" type="text" class="form-control" placeholder="Search...">
                                 <span class="bx bx-search-alt"></span>
                             </div>
                         </form>
@@ -52,7 +52,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search ..." aria-label="Search input">
                                 
-                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>s
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -68,7 +68,7 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/logo_only.png"
+                                <img class="rounded-circle header-profile-user" src="{{url ('assets/images/logo_only.png') }}"
                                     alt="Header Avatar">
                                 <span class="ms-1">{{ $user->name }}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -101,7 +101,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="/home" id="topnav-dashboard" role="button"
                                     >
-                                        <i class="bx bx-home-circle me-2"></i><span key="t-dashboards">Dashboards</span> 
+                                        <i class="bx bx-home-circle me-2"></i><span key="t-dashboards">Home</span> 
                                         <!-- <div class="arrow-down"></div> -->
                                     </a>
                                     <!-- <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
@@ -115,7 +115,7 @@
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-uielement" role="button"
+                                    <a class="nav-link dropdown-toggle arrow-none" href="/customer/index" id="topnav-uielement" role="button"
                                     >
                                         <i class="bx bx-plus-medical me-2"></i>
                                         <span key="t-ui-elements"> Orders</span> 
