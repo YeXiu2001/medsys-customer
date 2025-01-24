@@ -3,9 +3,10 @@
 
 <div class="mobile-menu-overlay"></div>
 <div class="main-container">
-
+    
     <div class="col-12">
         <h4 class="fw-bold mb-1">Open Transactions</h4>
+        <div class="table-responsive" style="overflow-x: auto;">
         <table class="table table-striped table-bordered" id="openTransactionsTbl">
             <thead>
             <tr>
@@ -32,6 +33,7 @@
             </tbody>
             </thead>
         </table>
+        </div>
     </div>
 
     <div class="col-12 mt-4">
