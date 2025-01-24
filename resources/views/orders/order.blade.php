@@ -384,8 +384,7 @@
 
         // Add the item row in the table with the delete button beside the med name
         let cartRow = `<tr data-pmid="${pharmedid}">
-            <td>
-                <span>${medname}</span> 
+            <td id="editRow" class="fw-bold text-primary" style="cursor: pointer;" onclick="editItem('${pharmedid}')">${medname}
                 <button class="btn btn-danger btn-sm delete-btn" onclick="deleteItem('${pharmedid}')">
                     <i class="fas fa-trash"></i>
                 </button>
