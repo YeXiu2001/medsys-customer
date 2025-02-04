@@ -1,10 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <?php
-$urlheader = "http://";
 $ipdomain = env('IPDOMAIN');
-$ipport = env('PORTURL');
-$finalurl = $urlheader . $ipdomain . ":" . $ipport;
+$finalurl = $ipdomain;
 ?>
 <div class="row">
     @foreach ($pharmacyinfos as $pi)
