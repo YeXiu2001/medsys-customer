@@ -135,7 +135,7 @@
             @csrf 
             <div class="mb-1">
                 <label for="editmeds" class="form-label mb-0" >Product Name<span style="color: red">*</span></label>
-                <select id="editmeds" name="editmeds" class="select2 form-select" required style="width: 100%; max-height: 10px;">
+                <select id="editmeds" name="editmeds" class="select2 form-select" required disabled style="width: 100%; max-height: 10px;">
                     <option value="">Select...</option>
                     @forelse ($meds as $m)
                         <option value="{{$m->pharmed_id}}">{{$m->medname}}</option>
@@ -384,7 +384,8 @@
 
         // Add the item row in the table with the delete button beside the med name
         let cartRow = `<tr data-pmid="${pharmedid}">
-            <td id="editRow" class="fw-bold text-primary" style="cursor: pointer;" onclick="editItem('${pharmedid}')">${medname}
+            <td >
+            <span id="editRow" class="fw-bold text-primary" style="cursor: pointer;" onclick="editItem('${pharmedid}')">${medname}</span>
                 <button class="btn btn-danger btn-sm delete-btn" onclick="deleteItem('${pharmedid}')">
                     <i class="fas fa-trash"></i>
                 </button>

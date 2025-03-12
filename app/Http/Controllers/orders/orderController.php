@@ -17,50 +17,22 @@ class orderController extends Controller{
         $user = DB::table('user_customers')->where('id', $userId)->first();
 
         $open_transactions = DB::table('trans_order as to')
-            ->join('trans_items as ti', 'to.order_id', '=', 'ti.order_id')
-            ->select(
-                'to.order_id',
-                'ti.med_name',
-                'ti.qty',
-                'to.subtot_amt',
-                'to.prep_status',
-                'to.pay_status',
-                'to.trans_status',
-                'to.created_at',
-                'to.total_due',
-                'to.pay_method',
-                'to.total_discount',
-                'to.staff_id',
-                'to.pharmacy_id'
-            )
+        ->join('pharmacy_info as pi', 'to.pharmacy_id', '=', 'pi.id')
+        ->select('to.*', 'pi.name as pharmacy_name')
             ->where('to.customer_id', $userId)
-            ->where('to.trans_status', 'O')
+            ->where('trans_status', 'O')
             ->orderBy('to.created_at', 'desc')
             ->get();
 
         $closed_transactions = DB::table('trans_order as to')
-        ->join('trans_items as ti', 'to.order_id', '=', 'ti.order_id')
-        ->select(
-            'to.order_id',
-            'ti.med_name',
-            'ti.qty',
-            'to.subtot_amt',
-            'to.prep_status',
-            'to.pay_status',
-            'to.trans_status',
-            'to.created_at',
-            'to.total_due',
-            'to.pay_method',
-            'to.total_discount',
-            'to.staff_id',
-            'to.pharmacy_id'
-        )
-        ->where('to.customer_id', $userId)
-        ->where('to.trans_status', 'C')
-        ->orderBy('to.created_at', 'desc')
-        ->paginate(4);
+        ->join('pharmacy_info as pi', 'to.pharmacy_id', '=', 'pi.id')
+        ->select('to.*', 'pi.name as pharmacy_name')
+            ->where('to.customer_id', $userId)
+            ->where('trans_status', '!=', 'O')
+            ->orderBy('to.created_at', 'desc')
+            ->paginate(5);
 
-        return view ('orders/transactions', [
+        return view ('orders.transactions', [
             'user' => $user,
             'ots' => $open_transactions,
             'cts' => $closed_transactions
@@ -93,7 +65,7 @@ class orderController extends Controller{
                 )
                 ->get();
                 
-        return view('orders/order', [
+        return view('orders.order', [
             'meds' => $meds,
             'user' => $user,
             'pharmaId' => $pharmaId
@@ -173,6 +145,27 @@ class orderController extends Controller{
                 'error_details' => $e->getMessage(),  // Add error details to the response for debugging
             ]);
         }
+    }
+
+    public function viewItems(Request $request, $orderId){
+        $userId = $request->session()->get('user_id');
+
+        if (!$userId) {
+            return redirect('/customer/login');
+        }
+        $user = DB::table('user_customers')->where('id', $userId)->first();
+        
+        $items = DB::table('trans_items')
+            ->join('pharmacy_meds','trans_items.pharmed_id','=','pharmacy_meds.id')
+            ->select('trans_items.*', 'pharmacy_meds.*')
+            ->where('trans_items.order_id', $orderId)
+            ->get();
+
+        return view('orders.items', [
+            'order_id' => $orderId,
+            'user' => $user,
+            'items' => $items
+        ]);
     }
     
     
