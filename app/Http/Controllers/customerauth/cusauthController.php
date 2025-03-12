@@ -46,42 +46,34 @@ public function register(Request $request)
 
 public function addcustomer(Request $request)
     {
-        // Use request body instead of query parameters
-        $input = $request->all();
 
-        // Comprehensive validation
-        $validator = Validator::make($input, [
-            'name' => ['required'],
-            'email' => ['required'],
-            'password' => ['required'],
-            'contact' => ['required']
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'contact' => 'required',
         ]);
-
-        // Check validation
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error', 
-                'errors' => $validator->errors()
-            ], 422);
-        }
 
         DB::beginTransaction();
 
         try {
             $userId = DB::table('user_customers')->insertGetId([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password']),
-                'contact' => $input['contact'],
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'contact' => $request->contact,
             ]);
 
-            DB::commit();
+            if(!$userId) {
+                throw new \Exception('User registration failed');
+            }
 
+            DB::commit();
             return response()->json([
                 'status' => 'success', 
                 'message' => 'User created successfully',
                 'user_id' => $userId
-            ], 201);
+            ], 200);
 
         } catch (\Exception $e) {
             DB::rollBack();

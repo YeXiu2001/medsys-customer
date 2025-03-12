@@ -173,11 +173,8 @@
                         </div>
 
                         <div class="two-col">
-                            <div class="form-check one">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
-                                </label>
+                            <div class="text-start">
+                                <a href="/customer/register" class="ms-3 text-white" style="text-decoration: underline !important; color: blue;">Sign up here</a>
                             </div>
                         </div>
 
