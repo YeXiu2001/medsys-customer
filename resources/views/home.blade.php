@@ -8,17 +8,18 @@ $finalurl = $ipdomain;
     @foreach ($pharmacyinfos as $pi)
     @if(\Carbon\Carbon::now()->format('H:i:s') > $pi->o_time && \Carbon\Carbon::now()->format('H:i:s') < $pi->c_time)
     <div class="col-xl-4 col-sm-6">
-        <div class="card">
+        <div class="card" style="height: 100%;">
             <div class="row">
                 <div class="col-xl-5">
                     <div class="text-center pt-1 px-1 border-end">
                         <div class="avatar-sm mx-auto mb-3 mt-1"> 
                         <img src="<?= $finalurl ?>/{{ $pi->logo_dir ?? 'assets/images/logo_only.png' }}" 
+                            onclick="window.location='{{ route('viewPharmacy', $pi->id) }}'"
                             alt="Avatar" 
                             class="avatar-title rounded-circle" 
-                            style="width: 52px; height: 52px; object-fit: cover;">
+                            style="width: 52px; height: 52px; object-fit: cover; cursor: pointer;">
                         </div>
-                        <h5 class="text-truncate pb-1">{{$pi->name}}</h5>
+                        <h5 onclick="window.location='{{ route('viewPharmacy', $pi->id) }}'" class="text-truncate pb-1" style="cursor: pointer;">{{$pi->name}}</h5>
                         <p>{{$pi->address}}</p>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('/hero');
+    return view('hero');
 });
 
 Auth::routes();
@@ -34,6 +34,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+Route::get('/viewpharmacy/{id}', [HomeController::class, 'viewPharmacy'])->name('viewPharmacy');
 include __DIR__ . '/customerauth/auth.php';
 include __DIR__ . '/orders/order.php';
