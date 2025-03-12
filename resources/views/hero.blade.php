@@ -84,7 +84,7 @@
             <h2 class="display-3 fw-semibold" style="text-shadow: 2px 2px 4px #1b263b">Simplify Your Search</h2>
             <p class="fs-2 tagline">Make your health journey easier by connecting you with trusted pharmacies at your fingertips!</p>
             <a href="/customer/login" class="btn btn-lg btn-primary px-5">Login</a>
-            <a href="/register" class="btn btn-lg btn-secondary px-5">Register</a>
+            <a href="/customer/register" class="btn btn-lg btn-secondary px-5">Register</a>
         </div>
     </section>
     @include('layouts.components.script')
